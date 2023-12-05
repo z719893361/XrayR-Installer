@@ -26,9 +26,11 @@ function install() {
   wget "$core_download" -O XrayR
   chmod +x XrayR
   if [ ! -f "/etc/XrayR/config.yaml" ]; then
+    echo "Download the XrayR config file"
     curl -s https://raw.githubusercontent.com/z719893361/XrayR-Installer/main/config.yaml -O /etc/XrayR/config.yaml
   fi
-    if [ ! -f "/etc/systemd/system/XrayR.service" ]; then
+  if [ ! -f "/etc/systemd/system/XrayR.service" ]; then
+    echo "DOWNLOAD XrayR Core"
     wget https://raw.githubusercontent.com/z719893361/XrayR-Installer/main/XrayR.service -O /etc/systemd/system/XrayR.service
     systemctl daemon-reload
     systemctl enable XrayR
@@ -37,8 +39,15 @@ function install() {
   ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
   echo "Asia/Shanghai" > /etc/timezone
   echo "开启BBR"
-  echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-  echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+  # 检查是否已经存在配置
+  if ! grep -q "net.core.default_qdisc=fq" /etc/sysctl.conf; then
+      # 如果不存在，则添加配置
+      echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+  fi
+  if ! grep -q "net.ipv4.tcp_congestion_control=bbr" /etc/sysctl.conf; then
+      # 如果不存在，则添加配置
+      echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+  fi
   sysctl -p
 }
 
