@@ -1,6 +1,5 @@
 Log:
   Level: error
-  error
 ConnectionConfig:
   Handshake: 4    # Handshake time limit, Second
   ConnIdle: 30    # Connection idle time limit, Second
@@ -11,7 +10,7 @@ Nodes:
  - PanelType: "NewV2board"
     ApiConfig:
       ApiHost: "http://www.example.com"
-      ApiKey: "your password"
+      ApiKey: "your api key"
       NodeID: 5
       NodeType: V2ray
       Timeout: 30
@@ -25,4 +24,4 @@ Nodes:
         Timeout: 5 # Timeout for redis request
         Expiry: 20  # Expiry time (second)
 
-  
+      
