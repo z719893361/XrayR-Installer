@@ -37,9 +37,9 @@ function install() {
   ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
   echo "Asia/Shanghai" > /etc/timezone
   echo "开启BBR"
-  echo "net.core.default_qdisc=fq" | sudo tee -a /etc/sysctl.conf
-  echo "net.ipv4.tcp_congestion_control=bbr" | sudo tee -a /etc/sysctl.conf
-  sudo sysctl -p
+  echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+  echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
+  sysctl -p
 }
 
 function uninstall() {
