@@ -25,13 +25,13 @@ function install() {
   fi
   wget "$core_download" -O XrayR
   chmod +x XrayR
-  if [ ! -f "/etc/systemd/system/XrayR.service" ]; then
+  if [ ! -f "/etc/XrayR/config.yaml" ]; then
+    curl -s https://raw.githubusercontent.com/z719893361/XrayR-Installer/main/config.yaml -O /etc/XrayR/config.yaml
+  fi
+    if [ ! -f "/etc/systemd/system/XrayR.service" ]; then
     wget https://raw.githubusercontent.com/z719893361/XrayR-Installer/main/XrayR.service -O /etc/systemd/system/XrayR.service
     systemctl daemon-reload
     systemctl enable XrayR
-  fi
-  if [ ! -f "/etc/XrayR/config.yaml" ]; then
-    curl -s https://raw.githubusercontent.com/z719893361/XrayR-Installer/main/config.yaml -O /etc/XrayR/config.yaml
   fi
   echo "修改时区为Asia/Shanghai"
   ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
