@@ -27,7 +27,7 @@ function install() {
   chmod +x XrayR
   if [ ! -f "/etc/systemd/system/XrayR.service" ]; then
     wget https://raw.githubusercontent.com/z719893361/XrayR-Installer/main/XrayR.service -O /etc/systemd/system/XrayR.service
-    sudo systemctl daemon-reload
+    systemctl daemon-reload
     systemctl enable XrayR
   fi
   if [ ! -f "/etc/XrayR/config.yaml" ]; then
