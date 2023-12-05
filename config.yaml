@@ -1,5 +1,5 @@
 Log:
-  Level: error
+  Level: error  
 ConnectionConfig:
   Handshake: 4    # Handshake time limit, Second
   ConnIdle: 30    # Connection idle time limit, Second
@@ -8,20 +8,20 @@ ConnectionConfig:
   BufferSize: 64  # The internal cache size of each connection, kB
 Nodes:
  - PanelType: "NewV2board"
-    ApiConfig:
-      ApiHost: "http://www.example.com"
-      ApiKey: "your api key"
-      NodeID: 5
-      NodeType: V2ray
-      Timeout: 30
-      EnableVless: false
-    ControllerConfig:
-      GlobalDeviceLimitConfig:
-        Enable: false # Enable the global device limit of a user
-        RedisAddr: 1.1.1.1
-        RedisPassword: 
-        RedisDB: 1
-        Timeout: 5 # Timeout for redis request
-        Expiry: 20  # Expiry time (second)
+   ApiConfig:
+     ApiHost: "http://www.example.com"
+     ApiKey: "your api key"
+     NodeID: 5
+     NodeType: V2ray
+     Timeout: 30
+     EnableVless: false
+  ControllerConfig:
+    GlobalDeviceLimitConfig:
+      Enable: false # Enable the global device limit of a user
+      RedisAddr: 1.1.1.1
+      RedisPassword: 
+      RedisDB: 1
+      Timeout: 5 # Timeout for redis request
+      Expiry: 20  # Expiry time (second)
 
       
