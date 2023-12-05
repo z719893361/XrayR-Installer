@@ -1,25 +1,28 @@
 Log:
   Level: error
+  error
 ConnectionConfig:
-  Handshake: 4 # Handshake time limit, Second
-  ConnIdle: 30 # Connection idle time limit, Second
-  UplinkOnly: 2 # Time limit when the connection downstream is closed, Second
+  Handshake: 4    # Handshake time limit, Second
+  ConnIdle: 30    # Connection idle time limit, Second
+  UplinkOnly: 2   # Time limit when the connection downstream is closed, Second
   DownlinkOnly: 4 # Time limit when the connection is closed after the uplink is closed, Second
-  BufferSize: 64 # The internal cache size of each connection, kB
+  BufferSize: 64  # The internal cache size of each connection, kB
 Nodes:
+ - PanelType: "NewV2board"
     ApiConfig:
-      ApiHost: 
-      ApiKey: 
+      ApiHost: "http://www.example.com"
+      ApiKey: "your password"
       NodeID: 5
       NodeType: V2ray
       Timeout: 30
-      EnableVless: false # Enable Vless for V2ray Type
-      DisableCustomConfig: false # disable custom config for sspanel
+      EnableVless: false
     ControllerConfig:
       GlobalDeviceLimitConfig:
-        Enable: true # Enable the global device limit of a user
-        RedisAddr: 
+        Enable: false # Enable the global device limit of a user
+        RedisAddr: 1.1.1.1
         RedisPassword: 
         RedisDB: 1
         Timeout: 5 # Timeout for redis request
-        7Expiry: 20 # Expiry time (second)
+        Expiry: 20  # Expiry time (second)
+
+  
