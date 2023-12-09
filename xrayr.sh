@@ -26,14 +26,13 @@ function install() {
   wget "$core_download" -O XrayR
   chmod +x XrayR
   if [ ! -f "/etc/XrayR/config.yaml" ]; then
-    echo "Download the XrayR config file"
-    curl -s https://raw.githubusercontent.com/z719893361/XrayR-Installer/main/config.yaml -O /etc/XrayR/config.yaml
+    echo "download XrayR configuration"
+    wget https://raw.githubusercontent.com/z719893361/XrayR-Installer/main/config.yaml -O /etc/XrayR/config.yaml
   fi
   if [ ! -f "/etc/systemd/system/XrayR.service" ]; then
-    echo "DOWNLOAD XrayR Core"
+    echo "setting XrayR Service"
     wget https://raw.githubusercontent.com/z719893361/XrayR-Installer/main/XrayR.service -O /etc/systemd/system/XrayR.service
     systemctl daemon-reload
-    sleep 4
     systemctl enable XrayR
   fi
   echo "修改时区为Asia/Shanghai"
