@@ -78,9 +78,14 @@ function update() {
     echo "服务未安装"
     exit 1
   fi
-  systemctl stop XrayR
+  is_active=$(systemctl is-active XrayR)
+  if "$is_active" == "activating"; then
+    systemctl stop XrayR
+  fi 
   core_download=$(curl -s https://api.github.com/repos/z719893361/XrayR/releases/latest | jq -r '.assets[0].browser_download_url|select("linux_amd64")')
-  systemctl start XrayR
+  if "$is_active" == "activating"; then
+    systemctl start XrayR
+  fi
 }
 
 while [ "$#" -gt 0 ]; do
