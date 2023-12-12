@@ -73,6 +73,16 @@ function uninstall() {
   fi
 }
 
+function update() {
+  if ! systemctl list-unit-files | grep -q "^XrayR.service$"; then
+    echo "服务未安装"
+    exit 1
+  fi
+  systemctl stop XrayR
+  core_download=$(curl -s https://api.github.com/repos/z719893361/XrayR/releases/latest | jq -r '.assets[0].browser_download_url|select("linux_amd64")')
+  systemctl start XrayR
+}
+
 while [ "$#" -gt 0 ]; do
   case "$1" in
     install)
@@ -80,6 +90,9 @@ while [ "$#" -gt 0 ]; do
       ;;
     uninstall)
       uninstall
+      ;;
+    update)
+      update
       ;;
     *)
       echo "Invalid argument: $1"
