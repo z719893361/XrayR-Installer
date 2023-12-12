@@ -74,9 +74,7 @@ function uninstall() {
 }
 
 function update() {
-  cd /etc/XrayR
   core_download=$(curl -s https://api.github.com/repos/z719893361/XrayR/releases/latest | jq -r '.assets[0].browser_download_url|select("linux_amd64")')
-  echo "$core_download"
   if [ -z "$core_download" ]; then
     echo "没有获取到下载地址"
     exit 1
@@ -85,8 +83,8 @@ function update() {
     echo "服务未安装"
     exit 1
   fi
+  cd /etc/XrayR
   is_active=$(systemctl is-active XrayR | xargs echo)
-  echo $is_active
   if [ "$is_active" == "active" ] || [ "$is_active" == "activating" ]; then
     systemctl stop XrayR
   fi
