@@ -35,19 +35,18 @@ function install() {
     systemctl daemon-reload
     systemctl enable XrayR
   fi
-  echo "修改时区为Asia/Shanghai"
   ln -snf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime
   echo "Asia/Shanghai" > /etc/timezone
-  echo "开启BBR"
-  # 检查是否已经存在配置
-  if ! grep -q "net.core.default_qdisc=fq" /etc/sysctl.conf; then
-      # 如果不存在，则添加配置
-      echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
-  fi
-  if ! grep -q "net.ipv4.tcp_congestion_control=bbr" /etc/sysctl.conf; then
-      # 如果不存在，则添加配置
-      echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
-  fi
+  echo "net.core.rmem_max=8388608" >> /etc/sysctl.conf
+  echo "net.core.wmem_max=8388608" >> /etc/sysctl.conf
+  echo "net.ipv4.tcp_rmem=4096 87380 8388608" >> /etc/sysctl.conf
+  echo "net.ipv4.tcp_wmem=4096 87380 8388608" >> /etc/sysctl.conf
+  echo "net.ipv4.tcp_mem=8388608 8388608 8388608" >> /etc/sysctl.conf
+  echo "net.ipv4.tcp_window_scaling=1" >> /etc/sysctl.conf
+  echo "net.ipv4.tcp_timestamps=1" >> /etc/sysctl.conf
+  echo "net.ipv4.tcp_fastopen=3" >> /etc/sysctl.conf
+  echo "net.core.default_qdisc=fq" >> /etc/sysctl.conf
+  echo "net.ipv4.tcp_congestion_control=bbr" >> /etc/sysctl.conf
   sysctl -p
 }
 
